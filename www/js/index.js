@@ -5,8 +5,9 @@ function fetch_and_display_posts(limit)
        $.get(settings.api + "?per_page=" + limit, function(data, status){
         if(status == 'success') {
 
-           var posts = JSON.parse(JSON.stringify(data));
+           res = JSON.parse(JSON.stringify(data));
 
+/*
             var html = "";
 
             for(var count = 0; count < posts.length; count++)
@@ -24,11 +25,12 @@ function fetch_and_display_posts(limit)
             $('#post-page').bind('pageinit', function() {
                 $("#posts").listview("refresh");
             });
-
+*/
         } else {
             alert('error');
         }
     });
+
 
 /*
     var xhr = new XMLHttpRequest();
@@ -95,3 +97,123 @@ function open_browser(link)
 {
     window.open(link, '_blank', 'location=yes');
 }
+
+
+
+App.controller('home', function (page) {
+    /*
+     $(page)
+    .find('.app-button')
+    .on('click', function () {
+      console.log('button was clicked!');
+    });
+    */
+});
+
+App.controller('dgs', function (page) {
+
+
+    var $template = $(page).find('.page').remove();
+    var $pages = $(page).find('.pages');
+
+    data.forEach(function (data) {
+
+        var $page = $template.clone(true);
+
+        $page.find('.title').text(data.title);
+        $page.find('.content' ).text(data.content);
+
+        $pages.append($page);
+  });
+
+
+});
+
+
+App.controller('signUp', function (page) {
+
+    $(page)
+        .find('#btnSignUp')
+        .on('click', function () {
+            var email = $('#btnEmail').val();
+            var password = $('#btnPassword').val();
+            if (email && password) {
+            // on successful validation create the user
+                auth.createUser(email, password, function (error, user) {
+                    if (!error) {
+                        // App.load('SignIn'); 
+                    }
+                });
+            } else {
+            // on validation failure show the validation message
+                App.dialog({
+                    title: 'Validation Error',
+                    text: 'Please enter username and password.',
+                    okButton: 'Try Again',
+                    cancelButton: 'Cancel'
+                }, function (tryAgain) {
+                    if (tryAgain) {
+                        App.load('SignUp');
+                    }
+                });
+            }
+
+        });
+
+});
+
+
+App.controller('signIn', function (page) {
+
+    $(page)
+        .find('#btnSignIn')
+        .on('click', function () {
+            var email = $('#btnUsername').val();
+            var password = $('#btnPass').val();
+            if (email && password) {
+                auth.login('password', {
+                    email: email,
+                    password: password
+                });
+            } else {
+                App.dialog({
+                    title: 'Validation Error',
+                    text: 'Please enter username and password.',
+                    okButton: 'Try Again',
+                    cancelButton: 'Cancel'
+                }, function (tryAgain) {
+                    if (tryAgain) {
+                        App.load('SignIn');
+                    }
+                });
+            }
+        });
+});
+
+
+App.controller('profile', function (page,user) {
+    $(page)
+        .find('.user').text(user.email); //setting the email in welcome message 
+
+    $(page)
+        .find('.app-button')
+        .on('click', function () {
+            auth.logout();  //logs out the user session
+            App.load('signIn'); // loads the Sign In page
+        });
+});
+
+
+
+
+App.controller('contact', function (page, contacts) {
+  var $template = $(page).find('.contact').remove();
+  var $contacts = $(page).find('.contacts');
+  contacts.forEach(function (contact) {
+    var $contact = $template.clone(true);
+    $contact.find('.first-name').text(contact.firstName);
+    $contact.find('.last-name' ).text(contact.lastName );
+    $contacts.append($contact);
+  });
+});
+

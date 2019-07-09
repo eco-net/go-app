@@ -25,7 +25,7 @@
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, minimal-ui" />
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
     <!-- Good default declaration:
@@ -38,127 +38,159 @@
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
     <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" /> -->
-    <link rel="stylesheet" href="css/themes/GO.min.css" />
-    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/app.min.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <title>Grønt Overblik</title>
 </head>
 
 <body>
 
-    <div data-role="page" id="home" data-add-back-btn="true" data-back-btn-text="Hjem">
-        <div data-role="header" data-position="fixed">
-                <h1>Grønt Overblik</h1>
+    <!-- Home -->
+    <div class="app-page" data-page="home">
+        <div class="app-topbar">
+            <div class="app-button left" data-target="menu">Menu</div>
+            <div class="app-title">Oversigt</div>
+            <div class="app-button right" data-target="account">Profil</div>
+        </div>
+    <div class="app-content">
+        <div class="app-section">
+        <input type="search" class="app-input"> <!-- will have search icon -->
+        </div>
+        <div class="app-section">
+            <ul class="app-list">
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <div class="app-page" data-page="menu">
+        <div class="app-topbar">
+            <div class="app-button left" data-back>Tilbage</div>
+            <div class="app-title">Menu</div>
+        </div>
+    <div class="app-content">
+        <div class="app-section">
+            <ul class="app-list">
+                <label>Sider</label>
+                <li class="app-button" data-target="dgs">De Grønne Sider</li>
+                <li class="app-button" data-target="dgk">Den Grønne Kalender</li>
+                <li class="app-button" data-target="dgb">Den Grønne Bibliotek</li>
+                <li class="app-button" data-target="dgb">Den Grønne Opslagstavle</li>
+                <label>Konto</label>
+                <li class="app-button" data-target="account">Profil</li>
+                <li class="app-button" data-target="signIn">Log ind</li>
+                <li class="app-button" data-target="signUp">Tilmeld</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- DGS -->
+    <div class="app-page" data-page="dgs">
+        <div class="app-topbar">
+            <div class="app-button left" data-back>Tilbage</div>
+            <div class="app-title">Sider</div>
+        </div>
+        <div class="app-content">
+            <div class="pages">
+                <div class="page">
+                    <div class="title"></div>
+                    <div class="content"></div>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <div data-role="main" class="ui-content">
-                <ul data-role="listview">
-                    <li data-role="list-divider">Vælg region</li>
-                    <li><a href="#region-1">Hovedstaden</a></li>
-                    <li><a href="#region-2">Midtjylland</a></li>
-                    <li><a href="#region-3">Nordjylland</a></li>
-                    <li><a href="#region-4">Sjælland</a></li>
-                    <li><a href="#region-5">Syddanmark</a></li>                  
-                </ul>
+    <!-- Contact -->
+    <div class="app-page" data-page="contact">
+        <div class="app-topbar">
+            <div class="app-title">Contact</div>
+        </div>
+        <div class="app-content">
+            <div class="contacts">
+                <div class="contact">
+                    <div class="first-name"></div>
+                    <div class="last-name"></div>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <div data-role="footer" data-position="fixed">        
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#find">Find</a></li>
-                        <li><a href="#create">Opret</a></li>
-                        <li><a href="#saved">Gemte</a></li>
-                        <li><a href="#news">Nyheder</a></li>
-                    </ul>
-                </div><!-- /navbar -->
-        </div><!-- /footer -->
-    </div> 
-
-    <div data-role="page" id="login" data-add-back-btn="true" data-back-btn-text="Hjem">
-            <div data-role="header" data-position="fixed">
-                <h1>Login</h1>
+    <!-- Account -->
+    <div class="app-page" data-page="account">
+        <div class="app-topbar">
+            <div class="app-button left" data-back>Tilbage</div>
+            <div class="app-title">Konto</div>
+        </div>
+        <div class="app-content">
+            <div class="app-section">
+                <div class="app-button green" data-target="SignIn">Log ind</div>
+                <div class="app-button blue" data-target="SignUp">Tilmeld</div>
             </div>
+        </div>
+    </div>
 
-            <div data-role="main" class="ui-content">
-                <input id="username" type="text" placeholder="Enter Username">
-                <input id="password" type="password" placeholder="Enter Password">
-                <button onclick="login();">Login</button>
-                <a href="#posts" id="page_two_link"></a>
+    <!-- Profile -->
+    <div class="app-page" data-page="profile">
+        <div class="app-topbar">
+            <div class="app-button left" data-back>Tilbage</div>
+            <div class="app-title">Profil</div>
+            <div class="app-button right">Log ud</div>
+        </div>
+        <div class="app-content">
+            <div class="app-section">
             </div>
+        </div>
+    </div>
 
-            <div data-role="footer" data-position="fixed">        
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#find">Find</a></li>
-                        <li><a href="#create">Opret</a></li>
-                        <li><a href="#saved">Gemte</a></li>
-                        <li><a href="#news">Nyheder</a></li>
-                    </ul>
-                </div><!-- /navbar -->
-            </div><!-- /footer -->
-
-        </div> 
-
-        <div data-role="page" id="find" data-add-back-btn="true" data-back-btn-text="Hjem">
-
-            <div data-role="header" data-position="fixed">
-                <h1>Find</h1>
+    <!-- Signup -->
+    <div class="app-page" data-page="SignUp">
+        <div class="app-topbar">
+            <div class="app-button left blue" data-back>Konto</div>
+            <div class="app-title">Tilmeld</div>
+        </div>
+        <div class="app-content">
+            <div class="app-section">
+                <input id="btnEmail" class="app-input" placeholder="Email">
+                <input id="btnPassword" class="app-input " placeholder="Password" type="password">
+                <div id="btnSignUp" class="app-button green ">Tilmeld</div>
             </div>
+        </div>
+    </div>
 
-            <div data-role="main" class="ui-content">
-                <ul data-role="listview">
-                    <li><a href="#dgs">Organisationer og projekter</a></li>
-                    <li><a href="#dgk">Begivenheder og events</a></li>
-                    <li><a href="#dgb">Viden og inspiration</a></li>
-                    <li><a href="#dgo">Grønne idéer og tanker</a></li>                  
-                </ul>
+    <!-- Signin -->
+    <div class="app-page" data-page="SignIn">
+        <div class="app-topbar">
+            <div class="app-button left blue" data-back>Konto</div>
+            <div class="app-title">Log ind</div>
+        </div>
+        <div class="app-content">
+            <div class="app-section">
+                <input id="btnUsername" class="app-input" placeholder="Brugernavn">
+                <input id="btnPass" class="app-input" placeholder="Adgangskode" type="password">
+                <div id="btnSignIn" class="app-button green">Log ind</div>
             </div>
+        </div>
+    </div>
 
-            <div data-role="footer" data-position="fixed">        
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#find">Find</a></li>
-                        <li><a href="#create">Opret</a></li>
-                        <li><a href="#saved">Gemte</a></li>
-                        <li><a href="#news">Nyheder</a></li>
-                    </ul>
-                </div><!-- /navbar -->
-            </div><!-- /footer -->
-
-        </div><!-- /page -->  
-
-        <div data-role="page" id="dgk" data-add-back-btn="true" data-back-btn-text="Find">
-            <div data-role="header" data-position="fixed">
-                <h1>Data</h1>
-            </div>
-
-            <div data-role="main" class="ui-content">
-                <ul data-role="listview" data-filter="true" id="posts">                 
-                </ul>
-            </div>
-
-             <div data-role="footer" data-position="fixed">        
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#find">Find</a></li>
-                        <li><a href="#create">Opret</a></li>
-                        <li><a href="#saved">Gemte</a></li>
-                        <li><a href="#news">Nyheder</a></li>
-                    </ul>
-                </div><!-- /navbar -->
-            </div><!-- /footer -->
-        </div><!-- /page --> 
 
     <!-- <script type="text/javascript" src="cordova.js"></script> -->
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/lib/app.min.js"></script>
     <script type="text/javascript" src="js/settings.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
-        fetch_and_display_posts(2);
-        //app.initialize();
+        try {
+            App.restore();
+        } catch (err) {
+            App.load('home');
+        }
     });
     </script>
 </body>
